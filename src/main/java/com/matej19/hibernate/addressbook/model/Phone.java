@@ -1,13 +1,16 @@
 package com.matej19.hibernate.addressbook.model;
 
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
+@Entity(name = "Phone")
 public class Phone {
 	
 	public static enum Type {MOBILE, PERSONAL, BUSINESS, LANDLINE, FAX}
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	private Type type;
+	//private Type type;
 	private String number;
 	
 	@ManyToOne
@@ -18,7 +21,7 @@ public class Phone {
 	public Phone(int id, Type type, String number) {
 		super();
 		this.id = id;
-		this.type = type;
+		//this.type = type;
 		this.number = number;
 	}
 	
@@ -28,12 +31,14 @@ public class Phone {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Type getType() {
-		return type;
-	}
-	public void setType(Type type) {
-		this.type = type;
-	}
+	
+//	public Type getType() {
+//		return type;
+//	}
+//	public void setType(Type type) {
+//		this.type = type;
+//	}
+	
 	public String getNumber() {
 		return number;
 	}

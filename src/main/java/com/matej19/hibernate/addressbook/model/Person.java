@@ -17,7 +17,7 @@ public class Person {
 	private String surname;
 	
 	@OneToMany(mappedBy = "owner")
-	private List<Phone> phoneNumbers = new ArrayList<Phone>();
+	private List<Phone> phones = new ArrayList<Phone>();
 	
 	@OneToMany(mappedBy = "owner")
 	private List<Email> emails = new ArrayList<Email>();
@@ -56,12 +56,12 @@ public class Person {
 		this.surname = surname;
 	}
 
-	public List<Phone> getPhoneNumbers() {
-		return phoneNumbers;
+	public List<Phone> getPhones() {
+		return phones;
 	}
 
-	public void setPhone_numbers(List<Phone> phoneNumbers) {
-		this.phoneNumbers = phoneNumbers;
+	public void setPhone_numbers(List<Phone> phones) {
+		this.phones = phones;
 	}
 
 	public List<Email> getEmails() {
@@ -72,6 +72,13 @@ public class Person {
 		this.emails = emails;
 	}
 	
-	
+	@Override
+    public String toString() {
+		if (phones != null && phones.size() > 0) {
+			return name + " " + surname + " " + phones.get(0).getNumber();
+		}
+		
+        return name + " " + surname;
+    }
 
 }
