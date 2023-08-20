@@ -1,6 +1,12 @@
 package com.matej19.hibernate.addressbook;
 
 import javax.swing.*;
+
+import org.hibernate.Session;
+
+import com.matej19.hibernate.addressbook.model.Person;
+import com.matej19.hibernate.addressbook.util.HibernateUtil;
+
 import java.awt.BorderLayout;
 
 public class App 
@@ -27,6 +33,14 @@ public class App
         personListModel = new DefaultListModel();
         personList = new JList(personListModel);
         
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            Person person =  (Person) session.get(Person.class, 1);
+            personListModel.add(0, person);
+        } catch (Exception e) {System.exit(-1);}
+        
+        
+        
         frame.getContentPane().add(BorderLayout.SOUTH, searchPersonPanel);
         frame.getContentPane().add(BorderLayout.CENTER, new JScrollPane(personList));
         frame.pack();
@@ -35,10 +49,6 @@ public class App
 	
     public static void main( String[] args )
     {
-    	SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new App();
-            }
-        });   
+    	new App();  
     }
 }
